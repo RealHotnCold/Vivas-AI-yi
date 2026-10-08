@@ -1,5 +1,14 @@
 # Data Sources & Provenance
 
+## Phase 3 implementation (October 2026)
+
+The implemented sources, variables, documented Thanjavur point, baseline method,
+units, retrieval and failure behaviour are in [docs/PHASE_3.md](docs/PHASE_3.md).
+The production risk path uses Open-Meteo archive reanalysis data and NOAA CPC ONI;
+it does not use the Phase 2 mock values. NOAA ONI is raw context only. No
+satellite, IMD, crop calendar, yield, canal, economic, or crop-stress dataset has
+yet been integrated.
+
 ## Rule
 
 Every production number shown in the UI must be traceable to:

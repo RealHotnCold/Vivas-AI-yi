@@ -15,6 +15,24 @@ Owner:
 
 ## Initial decisions
 
+### D005 — Phase 3 exposes indicators, not a categorical crop-risk result
+Status: accepted
+Decision: Return climate anomalies and water-related indicators with an
+`unvalidated` risk status.
+Reason: No project-specific, validated crop-risk threshold or crop-water-stress
+model is available. This avoids fabricated risk/yield/recommendation claims.
+Impact: Phase 4 must validate and document any crop-risk model before a level or
+score is displayed.
+
+### D006 — Archive reanalysis baseline with documented point geometry
+Status: accepted
+Decision: Use Open-Meteo archive data at a fixed documented Thanjavur analysis
+point, with a 1991–2020 same-calendar-window baseline; expose NOAA ONI raw data.
+Reason: It is reproducible and keyless while avoiding a claim that the point is a
+district average or a farm observation.
+Impact: Polygon aggregation, ground observations and local crop calendars remain
+required before local advisory use.
+
 ### D001 — Narrow MVP geography
 Status: accepted
 Decision: Start with Thanjavur, Tamil Nadu.

@@ -1,5 +1,12 @@
 # Architecture
 
+## Phase 3 implementation
+
+`frontend Risk screen → GET /api/v1/farm/risk → FastAPI risk service → cached
+Open-Meteo archive / NOAA CPC ONI`. Acquisition, validation, aggregation and API
+schemas are separate under `backend/app`. The frontend never calculates anomaly
+values and does not fall back to mock risk data when the backend is unavailable.
+
 ## High-level
 
 Stitch UI

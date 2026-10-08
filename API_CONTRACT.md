@@ -4,6 +4,17 @@ This document is the boundary between frontend and backend.
 
 ## GET /api/v1/farm/risk
 
+### Phase 3 implementation
+
+`crop` is `paddy` or `groundnut`; `latitude` and `longitude` are optional and
+must be supplied together. Without coordinates, the documented Phase 3 Thanjavur
+analysis point is used. The response now supplies `location`, coordinates,
+`geographic_definition`, `assessment_period`, `baseline_period`,
+`climate_indicators`, `water_indicators`, `enso`, `risk`, `data_sources`, and
+`provenance`. `risk.status` is always `unvalidated` and `risk.level` is null:
+there is no categorical crop-risk model in Phase 3. Upstream unavailability is
+HTTP 503 with no mock fallback.
+
 Inputs:
 - latitude
 - longitude
