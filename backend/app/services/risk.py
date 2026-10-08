@@ -7,7 +7,6 @@ from ..data.geography import AnalysisLocation
 from ..schemas.risk import (ClimateIndicators, EnsoIndicator, FarmRiskResponse,
     ProvenanceRecord, RiskFoundation, WaterIndicators)
 from .cache import AsyncTTLCache
-from .crop_intelligence import assess_crop_intelligence, build_crop_features
 from .enso import NoaaOniClient
 from .open_meteo import DailyClimate, OpenMeteoArchiveClient, UpstreamDataError
 
@@ -102,5 +101,4 @@ class RiskService:
             f"30-day precipitation anomaly: {climate.precipitation_anomaly_mm} mm" + (f" ({climate.precipitation_anomaly_pct}%)" if climate.precipitation_anomaly_pct is not None else ""),
             f"30-day mean temperature anomaly: {climate.temperature_anomaly_c} °C",
         ]
-        crop_intelligence = assess_crop_intelligence(build_crop_features(crop, climate, water, enso))
-        return FarmRiskResponse(location=location.name, latitude=location.latitude, longitude=location.longitude, geographic_definition=location.definition, crop=crop, assessment_period=f"{start.isoformat()} to {end.isoformat()} (completed daily observations; UTC)", baseline_period=f"{self.settings.baseline_start_year}-{self.settings.baseline_end_year}", climate_indicators=climate, water_indicators=water, enso=enso, risk=RiskFoundation(explanation="Phase 3 reports measured climate indicators and anomalies only. No validated crop-risk threshold, crop-stress score, yield loss, or recommendation is asserted.", drivers=drivers), crop_intelligence=crop_intelligence, data_sources=provenance, provenance=provenance)
+        return FarmRiskResponse(location=location.name, latitude=location.latitude, longitude=location.longitude, geographic_definition=location.definition, crop=crop, assessment_period=f"{start.isoformat()} to {end.isoformat()} (completed daily observations; UTC)", baseline_period=f"{self.settings.baseline_start_year}-{self.settings.baseline_end_year}", climate_indicators=climate, water_indicators=water, enso=enso, risk=RiskFoundation(explanation="Phase 3 reports measured climate indicators and anomalies only. No validated crop-risk threshold, crop-stress score, yield loss, or recommendation is asserted.", drivers=drivers), data_sources=provenance, provenance=provenance)

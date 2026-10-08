@@ -15,15 +15,6 @@ Owner:
 
 ## Initial decisions
 
-### D007 — Do not infer crop stress or yield without local targets
-Status: accepted
-Decision: Expose crop-specific feature availability and `insufficient_evidence`
-outputs rather than a threshold-based score or yield estimate.
-Reason: The repository has no authoritative Thanjavur crop calendar, historical
-crop-condition target, or yield target aligned with the climate timeline.
-Impact: A validated offline dataset and time-aware evaluation are prerequisites
-for Phase 4 model registration.
-
 ### D005 — Phase 3 exposes indicators, not a categorical crop-risk result
 Status: accepted
 Decision: Return climate anomalies and water-related indicators with an
