@@ -1,6 +1,21 @@
 ﻿import { FarmRiskResponse, ActionsResponse, StressTestResponse, ScenarioType, VoiceQueryRequest, VoiceQueryResponse } from '../../types';
 import { MOCK_FARM_RISK, MOCK_ACTIONS_RESPONSE, MOCK_STRESS_TEST_DATA, MOCK_VOICE_QUERY_RESPONSE } from './mock';
 
+export interface Phase3FarmRiskResponse {
+  location: string;
+  latitude: number;
+  longitude: number;
+  geographic_definition: string;
+  crop: 'paddy' | 'groundnut';
+  assessment_period: string;
+  baseline_period: string;
+  climate_indicators: { precipitation_mm: number; baseline_precipitation_mm: number; precipitation_anomaly_mm: number; precipitation_anomaly_pct: number | null; mean_temperature_c: number; baseline_mean_temperature_c: number; temperature_anomaly_c: number; };
+  water_indicators: { reference_evapotranspiration_mm: number | null; climate_water_balance_proxy_mm: number | null; mean_surface_soil_moisture_m3_m3: number | null; limitation: string; };
+  enso: { oni: number | null; season: string | null; status: string; limitation: string };
+  risk: { status: 'unvalidated'; explanation: string; drivers: string[] };
+  data_sources: Array<{ source: string; dataset: string; variable: string; period: string }>;
+}
+
 /**
  * VivasAIyi Centralized API Client
  *
@@ -9,7 +24,18 @@ import { MOCK_FARM_RISK, MOCK_ACTIONS_RESPONSE, MOCK_STRESS_TEST_DATA, MOCK_VOIC
  */
 class ApiService {
   private useMock: boolean = true;
-  private baseUrl: string = process.env.NEXT_PUBLIC_API_URL || '';
+  private baseUrl: string = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+  // Phase 3 intentionally does not fall back to a mock: an unavailable source must be visible.
+  async getPhase3FarmRisk(latitude = 10.787, longitude = 79.1378, crop: 'paddy' | 'groundnut' = 'paddy'): Promise<Phase3FarmRiskResponse> {
+    const params = new URLSearchParams({ latitude: String(latitude), longitude: String(longitude), crop });
+    const res = await fetch(`${this.baseUrl}/api/v1/farm/risk?${params.toString()}`, { cache: 'no-store' });
+    if (!res.ok) {
+      const body = await res.json().catch(() => null);
+      throw new Error(body?.detail?.message || 'Real climate data is currently unavailable.');
+    }
+    return res.json();
+  }
 
   // GET /api/v1/farm/risk
   async getFarmRisk(latitude = 10.787, longitude = 79.1378, crop = 'paddy'): Promise<FarmRiskResponse> {
