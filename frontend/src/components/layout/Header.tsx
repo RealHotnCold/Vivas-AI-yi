@@ -12,8 +12,8 @@ export function Header({ currentRouteTitle }: HeaderProps) {
   const { language, toggleLanguage, t } = useI18n();
 
   return (
-    <header className="fixed top-0 w-full z-50 pt-safe bg-[#f2fcf2]/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-[#bec8d2]/30">
-      <div className="max-w-md mx-auto h-28 px-4 flex flex-col justify-between py-2">
+    <header className="fixed top-0 w-full max-w-[430px] z-50 pt-safe bg-[#f2fcf2]/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-[#bec8d2]/30">
+      <div className="w-full h-28 px-4 flex flex-col justify-between py-2">
         {/* Brand & Action Bar */}
         <div className="flex items-center justify-between gap-2">
           {/* Brand Logo & Name */}
@@ -36,7 +36,7 @@ export function Header({ currentRouteTitle }: HeaderProps) {
             <button
               onClick={toggleLanguage}
               aria-label="Language Toggle"
-              className="h-9 px-3 rounded-lg bg-[#dbe5db] text-[#151e18] flex items-center justify-center text-xs font-semibold transition-colors hover:bg-[#bec8d2] shadow-xs active:scale-95"
+              className="h-9 px-3 rounded-lg bg-[#dbe5db] text-[#151e18] flex items-center justify-center text-xs font-semibold transition-colors hover:bg-[#bec8d2] shadow-xs active:scale-95 cursor-pointer"
               type="button"
             >
               <span className={language === 'en' ? 'font-bold text-[#006591]' : 'text-[#3e4850]'}>EN</span>
@@ -44,11 +44,9 @@ export function Header({ currentRouteTitle }: HeaderProps) {
               <span className={language === 'ta' ? 'font-bold text-[#14532d]' : 'text-[#3e4850]'}>தமிழ்</span>
             </button>
 
-            <Link href="/profile" className="relative flex items-center justify-center" aria-label="Profile">
-              <div className="w-8 h-8 rounded-full bg-[#14532d] text-white flex items-center justify-center text-xs font-bold ring-2 ring-[#2e6a41]/20">
-                M
-              </div>
-            </Link>
+            <div className="w-8 h-8 rounded-full bg-[#14532d] text-white flex items-center justify-center text-xs font-bold ring-2 ring-[#2e6a41]/20">
+              M
+            </div>
           </div>
         </div>
 

@@ -34,20 +34,27 @@ export function AppShell({ children, activeTab = 'home', onTabChange, currentRou
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#f2fcf2] text-[#151e18] relative">
-      <Header currentRouteTitle={currentRouteTitle || titles[activeTab]} />
-      <main className="flex-1 flex flex-col relative w-full pt-28 pb-24 px-4 max-w-md mx-auto">
-        {children}
-      </main>
+    <div className="min-h-screen w-full bg-[#e8eee8] flex justify-center selection:bg-[#0ea5e9] selection:text-white">
+      {/* Mobile Frame Container: Emulates native smartphone screen */}
+      <div className="w-full max-w-[430px] min-h-screen bg-[#f2fcf2] text-[#151e18] shadow-[0_0_50px_rgba(0,0,0,0.15)] flex flex-col relative border-x border-[#bec8d2]/30">
+        
+        {/* Sticky Fixed Header within Mobile Frame */}
+        <Header currentRouteTitle={currentRouteTitle || titles[activeTab]} />
 
-      {/* Always Accessible Floating Speak Button */}
-      <FloatingMic onClick={handleOpenVoice} />
+        {/* Scrollable Screen Content */}
+        <main className="flex-1 flex flex-col w-full pt-28 pb-24 px-4 overflow-y-auto">
+          {children}
+        </main>
 
-      {/* Always Accessible Voice Modal Overlay */}
-      <VoiceModal isOpen={voiceOpen} onClose={() => setVoiceOpen(false)} />
+        {/* Universal Floating Speak Mic */}
+        <FloatingMic onClick={handleOpenVoice} />
 
-      {/* Bottom Navigation */}
-      <BottomNav activeTab={activeTab} onTabChange={onTabChange} />
+        {/* Universal Voice Modal Overlay */}
+        <VoiceModal isOpen={voiceOpen} onClose={() => setVoiceOpen(false)} />
+
+        {/* Fixed Mobile Bottom Nav */}
+        <BottomNav activeTab={activeTab} onTabChange={onTabChange} />
+      </div>
     </div>
   );
 }

@@ -29,8 +29,8 @@ export function BottomNav({ activeTab = 'home', onTabChange }: BottomNavProps) {
   const { language } = useI18n();
 
   return (
-    <nav className="fixed bottom-0 w-full z-50 pb-safe bg-[#f2fcf2]/95 backdrop-blur-xl border-t border-[#bec8d2]/30 shadow-[0_-2px_12px_rgba(0,0,0,0.05)]">
-      <div className="max-w-md mx-auto flex justify-around items-center h-20 px-1">
+    <nav className="fixed bottom-0 w-full max-w-[430px] z-50 pb-safe bg-[#f2fcf2]/95 backdrop-blur-xl border-t border-[#bec8d2]/30 shadow-[0_-2px_12px_rgba(0,0,0,0.05)]">
+      <div className="w-full flex justify-around items-center h-20 px-1">
         {NAV_ITEMS.map((item) => {
           const isActive = activeTab === item.id;
           return (
