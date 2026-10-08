@@ -1,4 +1,4 @@
-# Velsathon — Phase 0 Project Brain
+# Velsathon
 
 This folder is the shared source of truth for the Agricultural Climate Stress-Test Engine.
 
