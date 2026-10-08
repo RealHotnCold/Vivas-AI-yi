@@ -1,11 +1,15 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useI18n } from '../../i18n';
 import { MOCK_FARM_RISK } from '../../services/api/mock';
 
-export function RiskView() {
+interface RiskViewProps {
+  onNavigate?: (tab: any) => void;
+}
+
+export function RiskView({ onNavigate }: RiskViewProps = {}) {
   const { t, language } = useI18n();
   const [whyOpen, setWhyOpen] = useState(false);
   const [modelTrustOpen, setModelTrustOpen] = useState(false);

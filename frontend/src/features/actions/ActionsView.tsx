@@ -1,11 +1,15 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useI18n } from '../../i18n';
 import { MOCK_ACTIONS_RESPONSE } from '../../services/api/mock';
 
-export function ActionsView() {
+interface ActionsViewProps {
+  onNavigate?: (tab: any) => void;
+}
+
+export function ActionsView({ onNavigate }: ActionsViewProps = {}) {
   const { t, language } = useI18n();
   const [planDetailOpen, setPlanDetailOpen] = useState(false);
   const { topPriorityAction, sequentialInterventions, comparisonVisualizer, disclaimer } = MOCK_ACTIONS_RESPONSE;

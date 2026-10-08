@@ -1,11 +1,15 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useI18n } from '../../i18n';
 import { MOCK_FARM_CONTEXT, MOCK_FARM_RISK } from '../../services/api/mock';
 
-export function HomeView() {
+interface HomeViewProps {
+  onNavigate?: (tab: any) => void;
+}
+
+export function HomeView({ onNavigate }: HomeViewProps = {}) {
   const { t, language } = useI18n();
   const [causalExpanded, setCausalExpanded] = useState(false);
 

@@ -1,11 +1,12 @@
 ﻿'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useI18n } from '../../i18n';
 
+export type TabType = 'home' | 'risk' | 'actions' | 'stress-test' | 'profile';
+
 interface NavItem {
+  id: TabType;
   href: string;
   labelEn: string;
   labelTa: string;
@@ -13,31 +14,41 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { href: '/', labelEn: 'Home', labelTa: 'முகப்பு', icon: 'home' },
-  { href: '/risk', labelEn: 'Risk', labelTa: 'அபாயம்', icon: 'shield' },
-  { href: '/actions', labelEn: 'Actions', labelTa: 'நடவடிக்கை', icon: 'psychiatry' },
-  { href: '/stress-test', labelEn: 'Stress Test', labelTa: 'சோதனை', icon: 'bolt' },
-  { href: '/profile', labelEn: 'Voice', labelTa: 'குரல்', icon: 'mic' },
+  { id: 'home', href: '/', labelEn: 'Home', labelTa: 'முகப்பு', icon: 'home' },
+  { id: 'risk', href: '/risk', labelEn: 'Risk', labelTa: 'அபாயம்', icon: 'shield' },
+  { id: 'actions', href: '/actions', labelEn: 'Actions', labelTa: 'நடவடிக்கை', icon: 'psychiatry' },
+  { id: 'stress-test', href: '/stress-test', labelEn: 'Stress Test', labelTa: 'சோதனை', icon: 'bolt' },
+  { id: 'profile', href: '/profile', labelEn: 'Voice', labelTa: 'குரல்', icon: 'mic' },
 ];
 
-export function BottomNav() {
-  const pathname = usePathname();
+interface BottomNavProps {
+  activeTab?: TabType;
+  onTabChange?: (tab: TabType) => void;
+}
+
+export function BottomNav({ activeTab = 'home', onTabChange }: BottomNavProps) {
   const { language } = useI18n();
 
   return (
     <nav className="fixed bottom-0 w-full z-50 pb-safe bg-[#f2fcf2]/95 backdrop-blur-xl border-t border-[#bec8d2]/30 shadow-[0_-2px_12px_rgba(0,0,0,0.05)]">
       <div className="max-w-md mx-auto flex justify-around items-center h-20 px-1">
         {NAV_ITEMS.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive = activeTab === item.id;
           return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex flex-col items-center justify-center min-w-[56px] min-h-[48px] py-1 transition-all rounded-lg active:scale-95 ${
+            <button
+              key={item.id}
+              onClick={() => {
+                if (onTabChange) {
+                  onTabChange(item.id);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+              className={`flex flex-col items-center justify-center min-w-[56px] min-h-[48px] py-1 transition-all rounded-lg active:scale-95 cursor-pointer ${
                 isActive
                   ? 'text-[#006591] font-bold'
                   : 'text-[#3e4850] hover:text-[#151e18]'
               }`}
+              type="button"
               aria-current={isActive ? 'page' : undefined}
             >
               <span
@@ -52,7 +63,7 @@ export function BottomNav() {
               <span className="text-[9px] opacity-75 -mt-0.5 leading-tight">
                 {language === 'en' ? item.labelTa : item.labelEn}
               </span>
-            </Link>
+            </button>
           );
         })}
       </div>
