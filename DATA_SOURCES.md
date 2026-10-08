@@ -9,12 +9,6 @@ it does not use the Phase 2 mock values. NOAA ONI is raw context only. No
 satellite, IMD, crop calendar, yield, canal, economic, or crop-stress dataset has
 yet been integrated.
 
-## Phase 4 status
-
-Phase 4 reuses only the Phase 3 Open-Meteo/NOAA variables. No yield, crop
-calendar, NDVI, Sentinel-2, or crop-condition source has been integrated, so no
-crop-stress or yield model is claimed. See `docs/PHASE_4.md`.
-
 ## Rule
 
 Every production number shown in the UI must be traceable to:
