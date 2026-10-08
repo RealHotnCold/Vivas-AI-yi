@@ -7,7 +7,7 @@ import { HomeView } from '../features/home/HomeView';
 import { RiskView } from '../features/risk/RiskView';
 import { ActionsView } from '../features/actions/ActionsView';
 import { StressTestView } from '../features/stress-test/StressTestView';
-import { ProfileVoiceView } from '../features/profile/ProfileVoiceView';
+import { ProfileView } from '../features/profile/ProfileView';
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<TabType>('home');
@@ -18,7 +18,7 @@ export default function HomePage() {
       {activeTab === 'risk' && <RiskView onNavigate={setActiveTab} />}
       {activeTab === 'actions' && <ActionsView onNavigate={setActiveTab} />}
       {activeTab === 'stress-test' && <StressTestView />}
-      {activeTab === 'profile' && <ProfileVoiceView />}
+      {activeTab === 'profile' && <ProfileView />}
     </AppShell>
   );
 }

@@ -7,18 +7,17 @@ export type TabType = 'home' | 'risk' | 'actions' | 'stress-test' | 'profile';
 
 interface NavItem {
   id: TabType;
-  href: string;
   labelEn: string;
   labelTa: string;
   icon: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'home', href: '/', labelEn: 'Home', labelTa: 'முகப்பு', icon: 'home' },
-  { id: 'risk', href: '/risk', labelEn: 'Risk', labelTa: 'அபாயம்', icon: 'shield' },
-  { id: 'actions', href: '/actions', labelEn: 'Actions', labelTa: 'நடவடிக்கை', icon: 'psychiatry' },
-  { id: 'stress-test', href: '/stress-test', labelEn: 'Stress Test', labelTa: 'சோதனை', icon: 'bolt' },
-  { id: 'profile', href: '/profile', labelEn: 'Voice', labelTa: 'குரல்', icon: 'mic' },
+  { id: 'home', labelEn: 'Home', labelTa: 'முகப்பு', icon: 'home' },
+  { id: 'risk', labelEn: 'Risk', labelTa: 'அபாயம்', icon: 'shield' },
+  { id: 'actions', labelEn: 'Actions', labelTa: 'நடவடிக்கை', icon: 'psychiatry' },
+  { id: 'stress-test', labelEn: 'Stress Test', labelTa: 'சோதனை', icon: 'bolt' },
+  { id: 'profile', labelEn: 'Profile', labelTa: 'சுயவிவரம்', icon: 'person' },
 ];
 
 interface BottomNavProps {

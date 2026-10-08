@@ -1,10 +1,10 @@
 ﻿import { AppShell } from '../../components/layout/AppShell';
-import { ProfileVoiceView } from '../../features/profile/ProfileVoiceView';
+import { ProfileView } from '../../features/profile/ProfileView';
 
 export default function ProfilePage() {
   return (
-    <AppShell currentRouteTitle="Voice / Profile">
-      <ProfileVoiceView />
+    <AppShell activeTab="profile" currentRouteTitle="Profile">
+      <ProfileView />
     </AppShell>
   );
 }
