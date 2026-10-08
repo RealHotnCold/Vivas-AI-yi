@@ -7,6 +7,11 @@ Open-Meteo archive / NOAA CPC ONI`. Acquisition, validation, aggregation and API
 schemas are separate under `backend/app`. The frontend never calculates anomaly
 values and does not fall back to mock risk data when the backend is unavailable.
 
+Phase 4 adds `backend/app/services/crop_intelligence.py` as a pure feature and
+inference boundary. It is invoked after Phase 3 indicators are assembled; it does
+not acquire duplicate data or train during requests. A future offline training
+pipeline can register validated crop-specific artifacts behind this boundary.
+
 ## High-level
 
 Stitch UI

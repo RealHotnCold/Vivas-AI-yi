@@ -13,6 +13,13 @@ export interface Phase3FarmRiskResponse {
   water_indicators: { reference_evapotranspiration_mm: number | null; climate_water_balance_proxy_mm: number | null; mean_surface_soil_moisture_m3_m3: number | null; limitation: string; };
   enso: { oni: number | null; season: string | null; status: string; limitation: string };
   risk: { status: 'unvalidated'; explanation: string; drivers: string[] };
+  crop_intelligence: {
+    feature_set_version: string;
+    crop: 'paddy' | 'groundnut';
+    feature_availability: string[];
+    crop_stress: { status: 'insufficient_evidence'; level: null; score: null; growth_stage: null; drivers: string[]; uncertainty: string; };
+    yield_impact: { status: 'insufficient_evidence'; direction: null; estimate: null; uncertainty: string; };
+  };
   data_sources: Array<{ source: string; dataset: string; variable: string; period: string }>;
 }
 

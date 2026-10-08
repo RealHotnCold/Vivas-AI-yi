@@ -50,6 +50,32 @@ class RiskFoundation(BaseModel):
     drivers: List[str]
 
 
+class CropStressAssessment(BaseModel):
+    status: Literal["insufficient_evidence"]
+    level: None = None
+    score: None = None
+    growth_stage: None = None
+    drivers: List[str]
+    uncertainty: str
+    model: None = None
+
+
+class YieldImpactAssessment(BaseModel):
+    status: Literal["insufficient_evidence"]
+    direction: None = None
+    estimate: None = None
+    uncertainty: str
+    model: None = None
+
+
+class CropIntelligence(BaseModel):
+    feature_set_version: str
+    crop: Literal["paddy", "groundnut"]
+    feature_availability: List[str]
+    crop_stress: CropStressAssessment
+    yield_impact: YieldImpactAssessment
+
+
 class FarmRiskResponse(BaseModel):
     location: str
     latitude: float
@@ -62,5 +88,6 @@ class FarmRiskResponse(BaseModel):
     water_indicators: WaterIndicators
     enso: EnsoIndicator
     risk: RiskFoundation
+    crop_intelligence: CropIntelligence
     data_sources: List[ProvenanceRecord]
     provenance: List[ProvenanceRecord]
