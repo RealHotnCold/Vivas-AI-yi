@@ -13,10 +13,14 @@ class AsyncTTLCache:
     def __init__(self, ttl_seconds: int) -> None:
         self.ttl_seconds = ttl_seconds
         self._values: dict[str, tuple[float, object]] = {}
-        self._lock = asyncio.Lock()
+        self._lock: asyncio.Lock | None = None
 
     async def get_or_load(self, key: str, loader: Callable[[], Awaitable[T]]) -> T:
         now = time.monotonic()
+        # FastAPI builds sync dependencies in a worker thread; bind the lock to
+        # the request loop instead of requiring a loop at service construction.
+        if self._lock is None:
+            self._lock = asyncio.Lock()
         async with self._lock:
             cached = self._values.get(key)
             if cached and cached[0] > now:
