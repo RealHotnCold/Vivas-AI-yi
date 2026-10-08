@@ -15,6 +15,14 @@ analysis point is used. The response now supplies `location`, coordinates,
 there is no categorical crop-risk model in Phase 3. Upstream unavailability is
 HTTP 503 with no mock fallback.
 
+### Phase 4 extension
+
+Responses include `crop_intelligence`: a versioned feature-availability list and
+separate `crop_stress` and `yield_impact` objects. Until documented historical
+targets, crop calendars, and temporal validation are added, both objects have
+`status: "insufficient_evidence"` and all prediction fields are null. Clients
+must not convert feature anomalies into crop-stress or yield claims.
+
 Inputs:
 - latitude
 - longitude

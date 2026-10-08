@@ -1,5 +1,12 @@
 # ML Specification
 
+## Phase 4 status
+
+No trained model artifact is registered yet. The implemented feature contract is
+documented in `docs/PHASE_4.md`; it uses only variables available by the
+assessment date and exposes insufficient evidence rather than an invented score.
+Training is blocked pending authoritative crop-stage and historical target data.
+
 ## Goal
 
 Estimate climate/crop stress or yield anomaly from real features.
