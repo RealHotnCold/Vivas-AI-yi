@@ -7,9 +7,10 @@ import { MOCK_FARM_CONTEXT, MOCK_FARM_RISK } from '../../services/api/mock';
 
 interface HomeViewProps {
   onNavigate?: (tab: any) => void;
+  onOpenVoice?: () => void;
 }
 
-export function HomeView({ onNavigate }: HomeViewProps = {}) {
+export function HomeView({ onNavigate, onOpenVoice }: HomeViewProps = {}) {
   const { t, language } = useI18n();
   const [causalExpanded, setCausalExpanded] = useState(false);
 
@@ -317,27 +318,6 @@ export function HomeView({ onNavigate }: HomeViewProps = {}) {
           </Link>
         </div>
       </section>
-
-      {/* Floating Voice Button */}
-      <aside className="sticky bottom-24 self-end z-40 -mt-2">
-        <Link
-          href="/profile"
-          className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#14532d] text-white shadow-2xl active:scale-95 transition-all"
-        >
-          <div className="relative flex items-center justify-center">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#b1f2be] opacity-60"></span>
-            <span className="material-symbols-outlined text-[22px] relative z-10" style={{ fontVariationSettings: "'FILL' 1" }}>
-              mic
-            </span>
-          </div>
-          <div className="flex flex-col text-left">
-            <span className="text-xs font-bold leading-tight">{t.home.askByVoice}</span>
-            <span className="text-[10px] text-[#b1f2be] leading-none">
-              {language === 'en' ? 'குரல் மூலம் கேளுங்கள்' : 'Ask by Voice'}
-            </span>
-          </div>
-        </Link>
-      </aside>
     </div>
   );
 }

@@ -7,9 +7,10 @@ import { MOCK_ACTIONS_RESPONSE } from '../../services/api/mock';
 
 interface ActionsViewProps {
   onNavigate?: (tab: any) => void;
+  onOpenVoice?: () => void;
 }
 
-export function ActionsView({ onNavigate }: ActionsViewProps = {}) {
+export function ActionsView({ onNavigate, onOpenVoice }: ActionsViewProps = {}) {
   const { t, language } = useI18n();
   const [planDetailOpen, setPlanDetailOpen] = useState(false);
   const { topPriorityAction, sequentialInterventions, comparisonVisualizer, disclaimer } = MOCK_ACTIONS_RESPONSE;
@@ -58,13 +59,14 @@ export function ActionsView({ onNavigate }: ActionsViewProps = {}) {
             </p>
           </div>
 
-          <Link
-            href="/profile"
+          <button
+            onClick={() => onOpenVoice && onOpenVoice()}
             aria-label="Start voice advisory"
-            className="flex-shrink-0 w-12 h-12 rounded-full bg-white text-[#006591] shadow-lg flex items-center justify-center transition-transform active:scale-95 hover:bg-slate-50"
+            className="flex-shrink-0 w-12 h-12 rounded-full bg-white text-[#006591] shadow-lg flex items-center justify-center transition-transform active:scale-95 hover:bg-slate-50 cursor-pointer"
+            type="button"
           >
             <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>mic</span>
-          </Link>
+          </button>
         </div>
 
         {/* Live Animated Waveform & Quick Query Chips */}
@@ -79,18 +81,20 @@ export function ActionsView({ onNavigate }: ActionsViewProps = {}) {
             </div>
           </div>
           <div className="flex gap-1.5 overflow-x-auto pb-1 -mx-1 px-1">
-            <Link
-              href="/profile"
-              className="flex-shrink-0 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white text-[11px] font-medium transition-colors"
+            <button
+              onClick={() => onOpenVoice && onOpenVoice()}
+              className="flex-shrink-0 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white text-[11px] font-medium transition-colors cursor-pointer"
+              type="button"
             >
               &quot;மழை குறைவாக இருந்தால் நான் என்ன செய்ய வேண்டும்?&quot;
-            </Link>
-            <Link
-              href="/profile"
-              className="flex-shrink-0 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white text-[11px] font-medium transition-colors"
+            </button>
+            <button
+              onClick={() => onOpenVoice && onOpenVoice()}
+              className="flex-shrink-0 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white text-[11px] font-medium transition-colors cursor-pointer"
+              type="button"
             >
               &quot;AWD குழாய் வைப்பது எப்படி?&quot;
-            </Link>
+            </button>
           </div>
         </div>
       </section>
